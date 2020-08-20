@@ -8,6 +8,7 @@ import { translateCategory } from './translate';
 import { translateHeading } from './translate';
 import shortid from 'shortid';
 import moment from 'moment';
+require('dotenv').config();
 
 
 function App() {
@@ -37,9 +38,9 @@ function App() {
   const [pageNumber, setPageNumber] = useState(1);
   const [total, setTotal] = useState(0);
 
-  const categoryUrl = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&page=${pageNumber}&apiKey=7520266f722a4930ad3d2dcae24c405a`;
-  const quickSearchUrl = `https://newsapi.org/v2/everything?${quickSearch}&language=${language}&page=${pageNumber}&apiKey=7520266f722a4930ad3d2dcae24c405a`;
-  const advancedSearchUrl = `https://newsapi.org/v2/everything?${advancedSearch}&from=${date}&page=${pageNumber}&language=${articleLang}&sortBy=${sortedBy}&apiKey=7520266f722a4930ad3d2dcae24c405a`;
+  const categoryUrl = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&page=${pageNumber}&apiKey=${process.env.API_KEY}`;
+  const quickSearchUrl = `https://newsapi.org/v2/everything?${quickSearch}&language=${language}&page=${pageNumber}&apiKey=${process.env.API_KEY}`;
+  const advancedSearchUrl = `https://newsapi.org/v2/everything?${advancedSearch}&from=${date}&page=${pageNumber}&language=${articleLang}&sortBy=${sortedBy}&apiKey=${process.env.API_KEY}`;
 
   useEffect(() => {
     M.AutoInit();
