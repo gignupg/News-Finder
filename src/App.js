@@ -10,7 +10,6 @@ import shortid from 'shortid';
 import moment from 'moment';
 require('dotenv').config();
 
-
 function App() {
 
   const dateConverter = {
@@ -38,9 +37,9 @@ function App() {
   const [pageNumber, setPageNumber] = useState(1);
   const [total, setTotal] = useState(0);
 
-  const categoryUrl = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&page=${pageNumber}&apiKey=${process.env.API_KEY}`;
-  const quickSearchUrl = `https://newsapi.org/v2/everything?${quickSearch}&language=${language}&page=${pageNumber}&apiKey=${process.env.API_KEY}`;
-  const advancedSearchUrl = `https://newsapi.org/v2/everything?${advancedSearch}&from=${date}&page=${pageNumber}&language=${articleLang}&sortBy=${sortedBy}&apiKey=${process.env.API_KEY}`;
+  const categoryUrl = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&page=${pageNumber}&apiKey=${process.env.REACT_APP_API_KEY}`;
+  const quickSearchUrl = `https://newsapi.org/v2/everything?${quickSearch}&language=${language}&page=${pageNumber}&apiKey=41627c8ecf414bf195024eec9d725846`;
+  const advancedSearchUrl = `https://newsapi.org/v2/everything?${advancedSearch}&from=${date}&page=${pageNumber}&language=${articleLang}&sortBy=${sortedBy}&apiKey=41627c8ecf414bf195024eec9d725846`;
 
   useEffect(() => {
     M.AutoInit();
