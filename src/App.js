@@ -48,7 +48,6 @@ function App() {
   const callAPI = async (url) => {
     const response = await fetch(url);
     const news = await response.json();
-
     setArticles(news.articles);
     setTotal(news.totalResults);
   };
@@ -88,6 +87,23 @@ function App() {
     }
   }, [language]);
 
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+
+    if (category) {
+      callAPI(categoryUrl);
+    } else if (quickSearch) {
+      callAPI(quickSearchUrl);
+    } else if (advancedSearch) {
+      callAPI(advancedSearchUrl);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageNumber]);
+
   const languageHandler = (value) => {
     localStorage.setItem("language", value);
     setLanguage(value);
@@ -98,7 +114,6 @@ function App() {
     setQuickInput("");
     setAdvancedSearch("");
     setAdvancedInput("");
-    setAdvancedSearchOnOff(!advancedSearchOn);
     setCategory(value);
   };
 
@@ -106,6 +121,8 @@ function App() {
     e.preventDefault();
     if (quickInput) {
       setCategory("");
+      setAdvancedSearch("");
+      setAdvancedInput("");
       setQuickSearch(`qInTitle=${quickInput}`);
     }
   };
@@ -115,6 +132,9 @@ function App() {
     const switched = document.getElementById('switch').checked;
     if (advancedInput) {
       setCategory("");
+      setQuickSearch("");
+      setQuickInput("");
+
       if (switched) {
         setAdvancedSearch(`q=${advancedInput}`);
       } else {
@@ -132,8 +152,10 @@ function App() {
     }
   };
 
-  const paginationHandler = () => {
-    setPageNumber(pageNumber + 1);
+  const paginationHandler = (newPage) => {
+    if (newPage !== pageNumber) {
+      setPageNumber(newPage);
+    }
   };
 
   return (
